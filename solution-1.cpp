@@ -27,20 +27,10 @@ void mergeTwoArraysInOne(int first[], int second[], int third[], int fs, int ss,
 // Search in brute force way
 int kthSmallestUsingBruteForce(int arr[], int arrsize, int kthelement)
 {
-    int position = 0;
-    for (int i = 0; i < arrsize; i++)
-    {
-        if (kthelement == arr[i])
-        {
-            return position;
-        }
-        else
-        {
-            position++;
-        }
-    }
-
-    return -1;
+    if (kthelement <= arrsize)
+        return arr[kthelement-1];
+    else
+        return -1;
 }
 
 int main()
