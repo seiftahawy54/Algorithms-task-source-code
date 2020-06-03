@@ -20,22 +20,22 @@ int findKthElementUsingDAC(int* first, int* second, int startFirst, int EndFirst
     }
 
     // Conquer
-    int mid1 = (EndFirst - startFirst) / 2;
-    int mid2 = (endSecond - startSecond) / 2;
+    int center1 = (EndFirst - startFirst) / 2;
+    int center2 = (endSecond - startSecond) / 2;
 
-    if (mid1 + mid2 < key)
+    if (center1 + center2 < key)
     {
-        if (first[mid1] < second[mid2])
-            findKthElementUsingDAC(first + mid1 + 1, second, startFirst + mid1 + 1, EndFirst, startSecond, endSecond, key - mid1 - 1);
+        if (first[center1] < second[center2])
+            findKthElementUsingDAC(first + center1 + 1, second, startFirst + center1 + 1, EndFirst, startSecond, endSecond, key - center1 - 1);
         else
-            findKthElementUsingDAC(first, second + mid2 + 1, startFirst, EndFirst, startSecond + mid2 + 1, endSecond, key - mid2 - 1);
+            findKthElementUsingDAC(first, second + center2 + 1, startFirst, EndFirst, startSecond + center2 + 1, endSecond, key - center2 - 1);
     }
     else
     {
-        if (first[mid1] < second[mid2])
-            findKthElementUsingDAC(first, second, startFirst, EndFirst, startSecond, startSecond + mid2, key);
+        if (first[center1] < second[center2])
+            findKthElementUsingDAC(first, second, startFirst, EndFirst, startSecond, startSecond + center2, key);
         else
-            findKthElementUsingDAC(first, second, startFirst, startFirst + mid1, startSecond, endSecond, key);
+            findKthElementUsingDAC(first, second, startFirst, startFirst + center1, startSecond, endSecond, key);
     }
 }
 
