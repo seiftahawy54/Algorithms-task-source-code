@@ -55,9 +55,16 @@ int main()
     cout << "Enter kth element to search: " << endl;
     cin >> kth;
 
-    int kthelement = findKthElementUsingDAC(a, b, 0, aSize, 0, bSize, kth-1);
+    if (kth <= aSize+bSize)
+    {
+        int kthelement = findKthElementUsingDAC(a, b, 0, aSize, 0, bSize, kth-1);
 
-    cout << "The " << kth << "th number is: " << kthelement << endl;
+        cout << "The " << kth << "th number is: " << kthelement << endl;
+    }
+    else
+    {
+        cout << "Sorry, you have entered a big number" << endl;
+    }
 
     return 0;
 }
