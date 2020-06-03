@@ -5,40 +5,37 @@
 
 using namespace std;
 
-// Divide and conquer solution
-int findKthElementUsingDAC(int* firstArray, int* secondArray, int firstStart, int firstEnd, int secondStart, int secondEnd, int key)
+
+int findKthElementUsingDAC(int* first, int* second, int startFirst, int EndFirst, int startSecond, int endSecond, int key)
 {
     // First array base case
-    if (firstArray[firstStart] == firstArray[firstEnd])
+    if (startFirst == EndFirst)
     {
-        return secondArray[key];
+        return second[key];
     }
     // Second array base case
-    if (secondArray[secondStart] == secondArray[secondEnd])
+    if (startSecond == endSecond)
     {
-        return firstArray[key];
+        return first[key];
     }
-    // Simple cases to handle
-    if (key == 0)
-        return min(firstArray[key], secondArray[key]);
- 
-    // Conquer
-    int center1 = (firstEnd - firstStart) / 2;
-    int center2 = (secondEnd - secondStart) / 2;
 
-    if (center1 + center2 < key)
+    // Conquer
+    int mid1 = (EndFirst - startFirst) / 2;
+    int mid2 = (endSecond - startSecond) / 2;
+
+    if (mid1 + mid2 < key)
     {
-        if (firstArray[center1] < secondArray[center2])
-            findKthElementUsingDAC(firstArray + center1 + 1, secondArray, firstStart + center1 + 1, firstEnd, secondStart, secondEnd, key - center1 - 1);
+        if (first[mid1] < second[mid2])
+            findKthElementUsingDAC(first + mid1 + 1, second, startFirst + mid1 + 1, EndFirst, startSecond, endSecond, key - mid1 - 1);
         else
-            findKthElementUsingDAC(firstArray, secondArray, firstStart, firstEnd, secondStart + center2 + 1, secondEnd, key - center2 - 1);
-    }   
+            findKthElementUsingDAC(first, second + mid2 + 1, startFirst, EndFirst, startSecond + mid2 + 1, endSecond, key - mid2 - 1);
+    }
     else
     {
-        if (firstArray[center1] < secondArray[center2])
-            findKthElementUsingDAC(firstArray, secondArray, firstStart, firstEnd, secondStart + center1, secondEnd, key);
+        if (first[mid1] < second[mid2])
+            findKthElementUsingDAC(first, second, startFirst, EndFirst, startSecond, startSecond + mid2, key);
         else
-            findKthElementUsingDAC(firstArray, secondArray, firstStart + center1, firstEnd, secondStart, secondEnd, key);
+            findKthElementUsingDAC(first, second, startFirst, startFirst + mid1, startSecond, endSecond, key);
     }
 }
 
